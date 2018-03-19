@@ -1,20 +1,20 @@
-# ÀûÓÃhexo github´î½¨µÄ¸öÈË²©¿Í
+# åˆ©ç”¨hexo githubæ­å»ºçš„ä¸ªäººåšå®¢
 
-Ö÷ÒªÓĞÁ½¸ö·ÖÖ§master¡¢hexo£¬master·ÖÖ§Ö÷Òª·Å²©¿ÍÎÄÕÂ£¬hexo·ÖÖ§Ö÷Òª·Åhexo¹¤³ÌÎÄ¼ş¡£master·ÖÖ§ÀàÈİĞèÒªÖ´ĞĞÒ»ÏÂÃüÁîÍÆËÍ
+ä¸»è¦æœ‰ä¸¤ä¸ªåˆ†æ”¯masterã€hexoï¼Œmasteråˆ†æ”¯ä¸»è¦æ”¾åšå®¢æ–‡ç« ï¼Œhexoåˆ†æ”¯ä¸»è¦æ”¾hexoå·¥ç¨‹æ–‡ä»¶ã€‚masteråˆ†æ”¯ç±»å®¹éœ€è¦æ‰§è¡Œä¸€ä¸‹å‘½ä»¤æ¨é€
 
  * hexo clean
  * hexo g
  * hexo d
  
  
-# ÃüÁî½âÊÍ
-	* hexo init [folder] # ³õÊ¼»¯Ò»¸öÍøÕ¾¡£Èç¹ûÃ»ÓĞÉèÖÃ folder £¬Hexo Ä¬ÈÏÔÚÄ¿Ç°µÄÎÄ¼ş¼Ğ½¨Á¢ÍøÕ¾
-	* hexo new [layout] <title> # ĞÂ½¨Ò»ÆªÎÄÕÂ¡£Èç¹ûÃ»ÓĞÉèÖÃ layout µÄ»°£¬Ä¬ÈÏÊ¹ÓÃ _config.yml ÖĞµÄ default_layout ²ÎÊı´úÌæ¡£Èç¹û±êÌâ°üº¬¿Õ¸ñµÄ»°£¬ÇëÊ¹ÓÃÒıºÅÀ¨ÆğÀ´
-	* hexo version # ²é¿´°æ±¾
-	* hexo clean # Çå³ı»º´æÎÄ¼ş (db.json) ºÍÒÑÉú³ÉµÄ¾²Ì¬ÎÄ¼ş (public)
-	* hexo g # µÈÓÚhexo generate # Éú³É¾²Ì¬ÎÄ¼ş
-	* hexo s # µÈÓÚhexo server # ±¾µØÔ¤ÀÀ
-	* hexo d # µÈÓÚhexo deploy # ²¿Êğ£¬¿ÉÓëhexo gºÏ²¢Îª hexo d -g
+# å‘½ä»¤è§£é‡Š
+	* hexo init [folder] # åˆå§‹åŒ–ä¸€ä¸ªç½‘ç«™ã€‚å¦‚æœæ²¡æœ‰è®¾ç½® folder ï¼ŒHexo é»˜è®¤åœ¨ç›®å‰çš„æ–‡ä»¶å¤¹å»ºç«‹ç½‘ç«™
+	* hexo new [layout] <title> # æ–°å»ºä¸€ç¯‡æ–‡ç« ã€‚å¦‚æœæ²¡æœ‰è®¾ç½® layout çš„è¯ï¼Œé»˜è®¤ä½¿ç”¨ _config.yml ä¸­çš„ default_layout å‚æ•°ä»£æ›¿ã€‚å¦‚æœæ ‡é¢˜åŒ…å«ç©ºæ ¼çš„è¯ï¼Œè¯·ä½¿ç”¨å¼•å·æ‹¬èµ·æ¥
+	* hexo version # æŸ¥çœ‹ç‰ˆæœ¬
+	* hexo clean # æ¸…é™¤ç¼“å­˜æ–‡ä»¶ (db.json) å’Œå·²ç”Ÿæˆçš„é™æ€æ–‡ä»¶ (public)
+	* hexo g # ç­‰äºhexo generate # ç”Ÿæˆé™æ€æ–‡ä»¶
+	* hexo s # ç­‰äºhexo server # æœ¬åœ°é¢„è§ˆ
+	* hexo d # ç­‰äºhexo deploy # éƒ¨ç½²ï¼Œå¯ä¸hexo gåˆå¹¶ä¸º hexo d -g
 	
-# ´î½¨²Î¿¼ÎÄÕÂ
+# æ­å»ºå‚è€ƒæ–‡ç« 
  https://www.jianshu.com/p/674c58cef707

@@ -75,14 +75,14 @@ pagination_dir: page
 theme: hexo-theme-next-master
 
 
-## ÔÚhexoÖĞÊµÏÖ¿ÉÊÓ»¯±à¼­²©¿Í£¨hexo-admin£©
+## åœ¨hexoä¸­å®ç°å¯è§†åŒ–ç¼–è¾‘åšå®¢ï¼ˆhexo-adminï¼‰
 admin:
   username: jackcooper
   password_hash: $2a$10$osMVv1zRqTe.Uglnt3bKVek1cg6w59T.qOVrp7eGknWNkduhafUna
   secret: where there is a will,there is a way
   deployCommand: './admin_script/hexo-generate.sh'
 
-## ÔÚhexoÖĞÊµÏÖRRS¹¦ÄÜ£¨ hexo-generator-feed £©
+## åœ¨hexoä¸­å®ç°RRSåŠŸèƒ½ï¼ˆ hexo-generator-feed ï¼‰
 feed:
   type: atom
   path: atom.xml
@@ -91,13 +91,16 @@ feed:
   content:
 
 
-# ×Ô¶¨ÒåÕ¾µãÄÚÈİËÑË÷
-# ĞèÒªÏÈ°²×°²å¼ş£º
+# è‡ªå®šä¹‰ç«™ç‚¹å†…å®¹æœç´¢
+# éœ€è¦å…ˆå®‰è£…æ’ä»¶ï¼š
 # npm install hexo-generator-search --save
 search:
   path: search.xml
-  # ÈçÖ»ÏëË÷ÒıÎÄÕÂ£¬¿ÉÉèÖÃÎªpost
+  # å¦‚åªæƒ³ç´¢å¼•æ–‡ç« ï¼Œå¯è®¾ç½®ä¸ºpost
   field: all
+
+# ç™¾åº¦ç»Ÿè®¡
+baidu_analytics: d876a707ce65a460fa37f2163d89c6e2
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
