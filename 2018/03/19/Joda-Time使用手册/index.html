@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="jackcooper" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="简介Joda-Time 令时间和日期值变得易于管理、操作和理解。事实上，易于使用是 Joda 的主要设计目标。其他目标包括可扩展性、完整的特性集以及对多种日历系统的支持。并且 Joda 与 JDK 是百分之百可互操作的，因此您无需替换所有 Java 代码，只需要替换执行日期/时间计算的那部分代码。本文主要就JDK date calendar  与 jodatime 对比。 一 、Joda-Time">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Joda-Time使用手册">
+<meta property="og:url" content="http:/jackcooper.github.io/2018/03/19/Joda-Time使用手册/index.html">
+<meta property="og:site_name" content="jackcooper">
+<meta property="og:description" content="简介Joda-Time 令时间和日期值变得易于管理、操作和理解。事实上，易于使用是 Joda 的主要设计目标。其他目标包括可扩展性、完整的特性集以及对多种日历系统的支持。并且 Joda 与 JDK 是百分之百可互操作的，因此您无需替换所有 Java 代码，只需要替换执行日期/时间计算的那部分代码。本文主要就JDK date calendar  与 jodatime 对比。 一 、Joda-Time">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-31T02:10:08.109Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Joda-Time使用手册">
+<meta name="twitter:description" content="简介Joda-Time 令时间和日期值变得易于管理、操作和理解。事实上，易于使用是 Joda 的主要设计目标。其他目标包括可扩展性、完整的特性集以及对多种日历系统的支持。并且 Joda 与 JDK 是百分之百可互操作的，因此您无需替换所有 Java 代码，只需要替换执行日期/时间计算的那部分代码。本文主要就JDK date calendar  与 jodatime 对比。 一 、Joda-Time">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http:/jackcooper.github.io/2018/03/19/Joda-Time使用手册/"/>
+
+
+
+
+
+  <title>Joda-Time使用手册 | jackcooper</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d876a707ce65a460fa37f2163d89c6e2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a href="https://github.com/jackcooper2015/jackcooper2015.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
+
+ <div class="bg_content">
+      <canvas id="canvas"></canvas>
+ </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">jackcooper</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:/jackcooper.github.io/2018/03/19/Joda-Time使用手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jackcooper">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/jackcooper.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jackcooper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Joda-Time使用手册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T17:14:00+08:00">
+                2018-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/19/Joda-Time使用手册/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/19/Joda-Time使用手册/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Joda-Time 令时间和日期值变得易于管理、操作和理解。事实上，易于使用是 Joda 的主要设计目标。其他目标包括可扩展性、完整的特性集以及对多种日历系统的支持。并且 Joda 与 JDK 是百分之百可互操作的，因此您无需替换所有 Java 代码，只需要替换执行日期/时间计算的那部分代码。本文主要就JDK date calendar  与 jodatime 对比。</p>
+<h2 id="一-、Joda-Time使用说明"><a href="#一-、Joda-Time使用说明" class="headerlink" title="一 、Joda-Time使用说明"></a>一 、Joda-Time使用说明</h2><h3 id="创建DateTime对象"><a href="#创建DateTime对象" class="headerlink" title="创建DateTime对象"></a>创建DateTime对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法一</span></span><br><span class="line"> DateTime dateTime = <span class="keyword">new</span> DateTime();</span><br><span class="line"><span class="comment">//方法二（推荐使用此方法）</span></span><br><span class="line">DateTime dateTime = SystemFactory.getClock().getDateTime();</span><br><span class="line"><span class="comment">//方法三</span></span><br><span class="line">DateTime dateTime = <span class="keyword">new</span> DateTime(</span><br><span class="line">  <span class="number">2000</span>, <span class="comment">//year</span></span><br><span class="line">  <span class="number">1</span>,    <span class="comment">// month</span></span><br><span class="line">  <span class="number">1</span>,    <span class="comment">// day</span></span><br><span class="line">  <span class="number">0</span>,    <span class="comment">// hour (midnight is zero)</span></span><br><span class="line">  <span class="number">0</span>,    <span class="comment">// minute</span></span><br><span class="line">  <span class="number">0</span>,    <span class="comment">// second</span></span><br><span class="line">  <span class="number">0</span>     <span class="comment">// milliseconds</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="创建LocalDate，LocalTime对象"><a href="#创建LocalDate，LocalTime对象" class="headerlink" title="创建LocalDate，LocalTime对象"></a>创建LocalDate，LocalTime对象</h3><p>LocalDate：该类封装了一个年/月/日的组合。当地理位置（即时区）变得不重要时，使用它存储日期将非常方便。例如，某个特定对象的出生日期 可能为 1999 年 4 月 16 日，但是从技术角度来看，在保存所有业务值的同时不会了解有关此日期的任何其他信息（比如这是一周中的星期几，或者这个人出生地所在的时区）。在这种情况下，应当使用 LocalDate。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法一</span></span><br><span class="line">LocalDate localDate = SystemFactory.getClock().getLocalDate();</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二</span></span><br><span class="line">LocalDate localDate = <span class="keyword">new</span> LocalDate(<span class="number">2009</span>, <span class="number">9</span>, <span class="number">6</span>);<span class="comment">// September 6, 2009</span></span><br></pre></td></tr></table></figure>
+<p>LocalTime：这个类封装一天中的某个时间，当地理位置不重要的情况下，可以使用这个类来只存储一天当中的某个时间。例如，晚上 11:52 可能是一天当中的一个重要时刻（比如，一个 cron 任务将启动，它将备份文件系统的某个部分），但是这个时间并没有特定于某一天，因此我不需要了解有关这一时刻的其他信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法一</span></span><br><span class="line">LocalTime localTime = SystemFactory.getClock().getLocalTime();</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二</span></span><br><span class="line">LocalTime localTime = <span class="keyword">new</span> LocalTime(<span class="number">13</span>, <span class="number">30</span>, <span class="number">26</span>, <span class="number">0</span>);<span class="comment">// 1:30:26PM</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、Joda处理时间"><a href="#二、Joda处理时间" class="headerlink" title="二、Joda处理时间"></a>二、Joda处理时间</h2><h3 id="日期计算"><a href="#日期计算" class="headerlink" title="日期计算"></a>日期计算</h3><h6 id="例1：计算上一个月的最后一天"><a href="#例1：计算上一个月的最后一天" class="headerlink" title="例1：计算上一个月的最后一天?"></a>例1：计算上一个月的最后一天?</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate now = SystemFactory.getClock().getLocalDate();</span><br><span class="line">LocalDate lastDayOfPreviousMonth = now.minusMonths(<span class="number">1</span>).dayOfMonth().withMaximumValue();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>yearOfCentury</li>
+<li>dayOfYear</li>
+<li>monthOfYear</li>
+<li>dayOfMonth</li>
+<li>dayOfWeek<h6 id="例2：获得任何一年中的第-11-月的第一个星期二的日期，而这天必须是在这个月的第一个星期一之后？"><a href="#例2：获得任何一年中的第-11-月的第一个星期二的日期，而这天必须是在这个月的第一个星期一之后？" class="headerlink" title="例2：获得任何一年中的第 11 月的第一个星期二的日期，而这天必须是在这个月的第一个星期一之后？"></a>例2：获得任何一年中的第 11 月的第一个星期二的日期，而这天必须是在这个月的第一个星期一之后？</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LocalDate now = SystemFactory.getClock().getLocalDate();</span><br><span class="line">LocalDate electionDate = now.monthOfYear()</span><br><span class="line"> .setCopy(<span class="number">11</span>)        <span class="comment">// November</span></span><br><span class="line"> .dayOfMonth()       <span class="comment">// Access Day Of Month Property</span></span><br><span class="line"> .withMinimumValue() <span class="comment">// Get its minimum value</span></span><br><span class="line"> .plusDays(<span class="number">6</span>)        <span class="comment">// Add 6 days</span></span><br><span class="line"> .dayOfWeek()        <span class="comment">// Access Day Of Week Property</span></span><br><span class="line"> .setCopy(<span class="string">"Monday"</span>)  <span class="comment">// Set to Monday (it will round down)</span></span><br><span class="line"> .plusDays(<span class="number">1</span>);       <span class="comment">// Gives us Tuesday</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>例2注释帮助您了解代码如何获得结果。.setCopy(“Monday”) 是整个计算的关键。不管中间 LocalDate 值是多少，将其 dayOfWeek 属性设置为 Monday 总是能够四舍五入，这样的话，在每月的开始再加上 6 天就能够让您得到第一个星期一。再加上一天就得到第一个星期二。Joda 使得执行此类计算变得非常容易。</strong></p>
+<h6 id="例3-：计算从现在开始经过两个星期之后的日期"><a href="#例3-：计算从现在开始经过两个星期之后的日期" class="headerlink" title="例3 ：计算从现在开始经过两个星期之后的日期"></a>例3 ：计算从现在开始经过两个星期之后的日期</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DateTime now = SystemFactory.getClock().getDateTime();</span><br><span class="line">DateTime then = now.plusWeeks(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="例4：计算从明天起-90-天以后的日期"><a href="#例4：计算从明天起-90-天以后的日期" class="headerlink" title="例4：计算从明天起 90 天以后的日期"></a>例4：计算从明天起 90 天以后的日期</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DateTime now = SystemFactory.getClock().getDateTime();</span><br><span class="line">DateTime tomorrow = now.plusDays(<span class="number">1</span>);</span><br><span class="line">DateTime then = tomorrow.plusDays(<span class="number">90</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="例5：-计算从现在起-156-秒之后的时间"><a href="#例5：-计算从现在起-156-秒之后的时间" class="headerlink" title="例5： 计算从现在起 156 秒之后的时间"></a>例5： 计算从现在起 156 秒之后的时间</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DateTime now = SystemFactory.getClock().getDateTime();</span><br><span class="line">DateTime then = now.plusSeconds(<span class="number">156</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="例6：计算五年后的第二个月的最后一天"><a href="#例6：计算五年后的第二个月的最后一天" class="headerlink" title="例6：计算五年后的第二个月的最后一天"></a>例6：计算五年后的第二个月的最后一天</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DateTime now = SystemFactory.getClock().getDateTime();</span><br><span class="line">DateTime then = now.minusYears(<span class="number">5</span>) <span class="comment">// five years ago</span></span><br><span class="line">               .monthOfYear()     <span class="comment">// get monthOfYear property</span></span><br><span class="line">               .setCopy(<span class="number">2</span>)        <span class="comment">// set it to February</span></span><br><span class="line">               .dayOfMonth()      <span class="comment">// get dayOfMonth property</span></span><br><span class="line">               .withMaximumValue();<span class="comment">// the last day of the month</span></span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h2 id="三-、Joda-和-JDK-互操作性"><a href="#三-、Joda-和-JDK-互操作性" class="headerlink" title="三 、Joda 和 JDK 互操作性"></a>三 、Joda 和 JDK 互操作性</h2><h5 id="从-Joda-DateTime-类创建-JDK-类"><a href="#从-Joda-DateTime-类创建-JDK-类" class="headerlink" title="从 Joda DateTime 类创建 JDK 类"></a>从 Joda DateTime 类创建 JDK 类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime = SystemFactory.getClock().getDateTime();</span><br><span class="line">Calendar calendar = dateTime.toCalendar(Locale.getDefault());</span><br><span class="line">Date date = dateTime.toDate();</span><br><span class="line">DateMidnight dateMidnight = SystemFactory.getClock().getDateMidnight();</span><br><span class="line">date = dateMidnight.toDate();</span><br></pre></td></tr></table></figure>
+<h5 id="从-Joda-LocalDate-类创建-JDK-类"><a href="#从-Joda-LocalDate-类创建-JDK-类" class="headerlink" title="从 Joda LocalDate 类创建 JDK 类"></a>从 Joda LocalDate 类创建 JDK 类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate = SystemFactory.getClock().getLocalDate();</span><br><span class="line">Date date = localDate.toDateMidnight().toDate();</span><br></pre></td></tr></table></figure>
+<h5 id="JDK-对象转换为Joda对象"><a href="#JDK-对象转换为Joda对象" class="headerlink" title="JDK 对象转换为Joda对象"></a>JDK 对象转换为Joda对象</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.util.Date jdkDate = obtainDateSomehow();</span><br><span class="line">dateTime = <span class="keyword">new</span> DateTime(jdkDate);</span><br></pre></td></tr></table></figure>
+<h5 id="将不同对象传递给-DateTime-的构造函数"><a href="#将不同对象传递给-DateTime-的构造函数" class="headerlink" title="将不同对象传递给 DateTime 的构造函数"></a>将不同对象传递给 DateTime 的构造函数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use a Calendar</span></span><br><span class="line">java.util.Calendar calendar = obtainCalendarSomehow();</span><br><span class="line">dateTime = <span class="keyword">new</span> DateTime(calendar);</span><br><span class="line"><span class="comment">// Use another Joda DateTime</span></span><br><span class="line">DateTime anotherDateTime = obtainDateTimeSomehow();</span><br><span class="line">dateTime = <span class="keyword">new</span> DateTime(anotherDateTime);</span><br><span class="line"><span class="comment">// Use a String (must be formatted properly)</span></span><br><span class="line">String timeString = <span class="string">"2006-01-26T13:30:00-06:00"</span>;</span><br><span class="line">dateTime = <span class="keyword">new</span> DateTime(timeString);</span><br><span class="line">timeString = <span class="string">"2006-01-26"</span>;</span><br><span class="line">dateTime = <span class="keyword">new</span> DateTime(timeString);</span><br></pre></td></tr></table></figure>
+<h3 id="以-Joda-方式格式化时间"><a href="#以-Joda-方式格式化时间" class="headerlink" title="以 Joda 方式格式化时间"></a>以 Joda 方式格式化时间</h3><h5 id="使用了-ISODateTimeFormat-的静态方法"><a href="#使用了-ISODateTimeFormat-的静态方法" class="headerlink" title="使用了 ISODateTimeFormat 的静态方法"></a>使用了 ISODateTimeFormat 的静态方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime = SystemFactory.getClock().getDateTime();</span><br><span class="line">dateTime.toString(ISODateTimeFormat.basicDateTime());</span><br><span class="line">dateTime.toString(ISODateTimeFormat.basicDateTimeNoMillis());</span><br><span class="line">dateTime.toString(ISODateTimeFormat.basicOrdinalDateTime());</span><br><span class="line">dateTime.toString(ISODateTimeFormat.basicWeekDateTime());</span><br></pre></td></tr></table></figure>
+<h5 id="传递-SimpleDateFormat-字符串"><a href="#传递-SimpleDateFormat-字符串" class="headerlink" title="传递 SimpleDateFormat 字符串"></a>传递 SimpleDateFormat 字符串</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime = SystemFactory.getClock().getDateTime();</span><br><span class="line">dateTime.toString(<span class="string">"MM/dd/yyyy hh:mm:ss.SSSa"</span>);</span><br><span class="line">dateTime.toString(<span class="string">"dd-MM-yyyy HH:mm:ss"</span>);</span><br><span class="line">dateTime.toString(<span class="string">"EEEE dd MMMM, yyyy HH:mm:ssa"</span>);</span><br><span class="line">dateTime.toString(<span class="string">"MM/dd/yyyy HH:mm ZZZZ"</span>);</span><br><span class="line">dateTime.toString(<span class="string">"MM/dd/yyyy HH:mm Z"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="number">09</span>/<span class="number">06</span>/<span class="number">2009</span> <span class="number">02</span>:<span class="number">30</span>:<span class="number">00.000</span>PM</span><br><span class="line"><span class="number">06</span>-Sep-<span class="number">2009</span> <span class="number">14</span>:<span class="number">30</span>:<span class="number">00</span></span><br><span class="line">Sunday <span class="number">06</span> September, <span class="number">2009</span> <span class="number">14</span>:<span class="number">30</span>:<span class="number">00</span>PM</span><br><span class="line"><span class="number">09</span>/<span class="number">06</span>/<span class="number">2009</span> <span class="number">14</span>:<span class="number">30</span> America/Chicago</span><br><span class="line"><span class="number">09</span>/<span class="number">06</span>/<span class="number">2009</span> <span class="number">14</span>:<span class="number">30</span> -<span class="number">0500</span></span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h2 id="四、对比例子"><a href="#四、对比例子" class="headerlink" title="四、对比例子"></a>四、对比例子</h2><h3 id="1、初始化某个瞬间的对象（除-“现在”-以外）并加上特定天数"><a href="#1、初始化某个瞬间的对象（除-“现在”-以外）并加上特定天数" class="headerlink" title="1、初始化某个瞬间的对象（除 “现在” 以外）并加上特定天数"></a>1、初始化某个瞬间的对象（除 “现在” 以外）并加上特定天数</h3><ul>
+<li>JDK <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Calendar calendar = Calendar.getInstance();</span><br><span class="line">calendar.set(<span class="number">2000</span>, Calendar.JANUARY, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"E MM/dd/yyyy HH:mm:ss.SSS"</span>);</span><br><span class="line">calendar.add(Calendar.DAY_OF_MONTH, <span class="number">90</span>);</span><br><span class="line">System.out.println(sdf.format(calendar.getTime()));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>*Joda<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime = <span class="keyword">new</span> DateTime(<span class="number">2000</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">System.out.println(dateTime.plusDays(<span class="number">90</span>).toString(<span class="string">"E MM/dd/yyyy HH:mm:ss.SSS"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="2、距离-2000年1月1日-45-天之后的某天在下一个月的当前周的最后一天的日期"><a href="#2、距离-2000年1月1日-45-天之后的某天在下一个月的当前周的最后一天的日期" class="headerlink" title="2、距离 2000年1月1日 45 天之后的某天在下一个月的当前周的最后一天的日期"></a>2、距离 2000年1月1日 45 天之后的某天在下一个月的当前周的最后一天的日期</h3><ul>
+<li>Joda<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime = <span class="keyword">new</span> DateTime(<span class="number">2000</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">System.out.println(dateTime.plusDays(<span class="number">45</span>).plusMonths(<span class="number">1</span>).dayOfWeek()</span><br><span class="line">  .withMaximumValue().toString(<span class="string">"E MM/dd/yyyy HH:mm:ss.SSS"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果</p>
+<blockquote>
+<p>Sun 03/19/2000 00:00:00.000</p>
+</blockquote>
+<hr>
+<p>文章参考： <a href="https://www.ibm.com/developerworks/cn/java/j-jodatime.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-jodatime.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/微服务场景下性能问题排查神器之xrebel/" rel="next" title="微服务场景下性能问题排查神器之xrebel">
+                <i class="fa fa-chevron-left"></i> 微服务场景下性能问题排查神器之xrebel
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/19/项目中常用的19条MySQL优化/" rel="prev" title="项目中常用的19条MySQL优化">
+                项目中常用的19条MySQL优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/03/19/Joda-Time使用手册/"
+           data-title="Joda-Time使用手册" data-url="http:/jackcooper.github.io/2018/03/19/Joda-Time使用手册/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/jackcooper.jpg"
+                alt="jackcooper" />
+            
+              <p class="site-author-name" itemprop="name">jackcooper</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jackcooper2015" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="1040078821@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-、Joda-Time使用说明"><span class="nav-number">2.</span> <span class="nav-text">一 、Joda-Time使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建DateTime对象"><span class="nav-number">2.1.</span> <span class="nav-text">创建DateTime对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建LocalDate，LocalTime对象"><span class="nav-number">2.2.</span> <span class="nav-text">创建LocalDate，LocalTime对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Joda处理时间"><span class="nav-number">3.</span> <span class="nav-text">二、Joda处理时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期计算"><span class="nav-number">3.1.</span> <span class="nav-text">日期计算</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#例1：计算上一个月的最后一天"><span class="nav-number">3.1.0.0.1.</span> <span class="nav-text">例1：计算上一个月的最后一天?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例2：获得任何一年中的第-11-月的第一个星期二的日期，而这天必须是在这个月的第一个星期一之后？"><span class="nav-number">3.1.0.0.2.</span> <span class="nav-text">例2：获得任何一年中的第 11 月的第一个星期二的日期，而这天必须是在这个月的第一个星期一之后？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例3-：计算从现在开始经过两个星期之后的日期"><span class="nav-number">3.1.0.0.3.</span> <span class="nav-text">例3 ：计算从现在开始经过两个星期之后的日期</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例4：计算从明天起-90-天以后的日期"><span class="nav-number">3.1.0.0.4.</span> <span class="nav-text">例4：计算从明天起 90 天以后的日期</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例5：-计算从现在起-156-秒之后的时间"><span class="nav-number">3.1.0.0.5.</span> <span class="nav-text">例5： 计算从现在起 156 秒之后的时间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例6：计算五年后的第二个月的最后一天"><span class="nav-number">3.1.0.0.6.</span> <span class="nav-text">例6：计算五年后的第二个月的最后一天</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-、Joda-和-JDK-互操作性"><span class="nav-number">4.</span> <span class="nav-text">三 、Joda 和 JDK 互操作性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#从-Joda-DateTime-类创建-JDK-类"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">从 Joda DateTime 类创建 JDK 类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从-Joda-LocalDate-类创建-JDK-类"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">从 Joda LocalDate 类创建 JDK 类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JDK-对象转换为Joda对象"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">JDK 对象转换为Joda对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#将不同对象传递给-DateTime-的构造函数"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">将不同对象传递给 DateTime 的构造函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以-Joda-方式格式化时间"><span class="nav-number">4.1.</span> <span class="nav-text">以 Joda 方式格式化时间</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用了-ISODateTimeFormat-的静态方法"><span class="nav-number">4.1.0.1.</span> <span class="nav-text">使用了 ISODateTimeFormat 的静态方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#传递-SimpleDateFormat-字符串"><span class="nav-number">4.1.0.2.</span> <span class="nav-text">传递 SimpleDateFormat 字符串</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、对比例子"><span class="nav-number">5.</span> <span class="nav-text">四、对比例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、初始化某个瞬间的对象（除-“现在”-以外）并加上特定天数"><span class="nav-number">5.1.</span> <span class="nav-text">1、初始化某个瞬间的对象（除 “现在” 以外）并加上特定天数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、距离-2000年1月1日-45-天之后的某天在下一个月的当前周的最后一天的日期"><span class="nav-number">5.2.</span> <span class="nav-text">2、距离 2000年1月1日 45 天之后的某天在下一个月的当前周的最后一天的日期</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=440241144&auto=0&height=66"></iframe>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+<script charset="Shift_JIS" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.js"></script>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jackcooper</span>
+
+  
+</div>
+
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jackcooper"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+   var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+     function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+     function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+     var Circle = function () {
+        function Circle(x, y) {
+             _classCallCheck(this, Circle);
+             this.x = x;
+             this.y = y;
+             this.r = Math.random() * 10;
+             this._mx = Math.random();
+             this._my = Math.random();
+         }
+        _createClass(Circle, [{
+             key: 'drawCircle',
+             value: function drawCircle(ctx) {
+                 ctx.beginPath();
+                 //arc() 方法使用一个中心点和半径，为一个画布的当前子路径添加一条弧。
+                 ctx.arc(this.x, this.y, this.r, 0, 360);
+                 ctx.closePath();
+                 ctx.fillStyle = 'rgba(204, 204, 204, 0.3)';
+                 ctx.fill();
+             }
+         }, {
+             key: 'drawLine',
+             value: function drawLine(ctx, _circle) {
+                 var dx = this.x - _circle.x;
+                 var dy = this.y - _circle.y;
+                 var d = Math.sqrt(dx * dx + dy * dy);
+                 if (d < 150) {
+                     ctx.beginPath();
+                     ctx.moveTo(this.x, this.y); //起始点
+                     ctx.lineTo(_circle.x, _circle.y); //终点
+                     ctx.closePath();
+                     ctx.strokeStyle = 'rgba(204, 204, 204, 0.3)';
+                     ctx.stroke();
+                 }
+             }
+         }, {
+             key: 'move',
+             value: function move(w, h) {
+                 this._mx = this.x < w && this.x > 0 ? this._mx : -this._mx;
+                 this._my = this.y < h && this.y > 0 ? this._my : -this._my;
+                 this.x += this._mx / 2;
+                 this.y += this._my / 2;
+             }
+         }]);
+         return Circle;
+     }();
+     var currentCirle = function (_Circle) {
+         _inherits(currentCirle, _Circle);
+         function currentCirle(x, y) {
+             _classCallCheck(this, currentCirle);
+             return _possibleConstructorReturn(this, (currentCirle.__proto__ || Object.getPrototypeOf(currentCirle)).call(this, x, y));
+         }
+         _createClass(currentCirle, [{
+             key: 'drawCircle',
+             value: function drawCircle(ctx) {
+                 ctx.beginPath();
+                 //this.r = (this.r < 14 && this.r > 1) ? this.r + (Math.random() * 2 - 1) : 2;
+                 this.r = 8;
+                 ctx.arc(this.x, this.y, this.r, 0, 360);
+                 ctx.closePath();
+                 //ctx.fillStyle = 'rgba(0,0,0,' + (parseInt(Math.random() * 100) / 100) + ')'
+                 ctx.fillStyle = 'rgba(255, 77, 54, 0.6)';
+                 ctx.fill();
+             }
+         }]);
+         return currentCirle;
+     }(Circle);
+     window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+     var canvas = document.getElementById('canvas');
+     var ctx = canvas.getContext('2d');
+     var w = canvas.width = canvas.offsetWidth;
+     var h = canvas.height = canvas.offsetHeight;
+     var circles = [];
+     var current_circle = new currentCirle(0, 0);
+     var draw = function draw() {
+         ctx.clearRect(0, 0, w, h);
+         for (var i = 0; i < circles.length; i++) {
+             circles[i].move(w, h);
+             circles[i].drawCircle(ctx);
+             for (j = i + 1; j < circles.length; j++) {
+                 circles[i].drawLine(ctx, circles[j]);
+             }
+         }
+         if (current_circle.x) {
+             current_circle.drawCircle(ctx);
+             for (var k = 1; k < circles.length; k++) {
+                 current_circle.drawLine(ctx, circles[k]);
+             }
+         }
+         requestAnimationFrame(draw);
+     };
+     var init = function init(num) {
+         for (var i = 0; i < num; i++) {
+             circles.push(new Circle(Math.random() * w, Math.random() * h));
+         }
+         draw();
+     };
+     window.addEventListener('load', init(60));
+     window.onmousemove = function (e) {
+         e = e || window.event;
+         current_circle.x = e.clientX;
+         current_circle.y = e.clientY;
+     };
+     window.onmouseout = function () {
+         current_circle.x = null;
+         current_circle.y = null;
+     };
+  </script>
+</body>
+</html>
